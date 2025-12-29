@@ -39,7 +39,7 @@ export function Footer() {
             <p className="mt-2 text-secondary-foreground/80">
               Subscribe for exclusive offers, brewing tips, and stories from Ethiopia&apos;s coffee heartland.
             </p>
-            <form className="mt-6 flex gap-2">
+            <form className="mt-6 flex flex-col gap-2 sm:flex-row">
               <Input
                 type="email"
                 placeholder="Enter your email"

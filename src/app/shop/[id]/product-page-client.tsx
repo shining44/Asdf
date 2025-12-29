@@ -99,15 +99,15 @@ export function ProductPageClient({ params }: ProductPageClientProps) {
             </div>
           </div>
           {/* Thumbnail Gallery Placeholder */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-2">
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className={`aspect-square w-20 cursor-pointer overflow-hidden rounded-lg bg-muted ${
+                className={`aspect-square w-16 sm:w-20 shrink-0 cursor-pointer overflow-hidden rounded-lg bg-muted ${
                   i === 0 ? "ring-2 ring-primary" : ""
                 }`}
               >
-                <div className="flex h-full w-full items-center justify-center text-2xl">
+                <div className="flex h-full w-full items-center justify-center text-xl sm:text-2xl">
                   ☕
                 </div>
               </div>
@@ -285,21 +285,21 @@ export function ProductPageClient({ params }: ProductPageClientProps) {
           </div>
 
           {/* Trust Badges */}
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            <div className="flex items-center gap-3 text-sm">
-              <Truck className="h-5 w-5 text-muted-foreground" />
+          <div className="mt-8 grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3 text-sm">
+              <Truck className="h-5 w-5 shrink-0 text-muted-foreground" />
               <span>Free shipping over $50</span>
             </div>
-            <div className="flex items-center gap-3 text-sm">
-              <RefreshCw className="h-5 w-5 text-muted-foreground" />
+            <div className="flex items-center gap-2 sm:gap-3 text-sm">
+              <RefreshCw className="h-5 w-5 shrink-0 text-muted-foreground" />
               <span>30-day returns</span>
             </div>
-            <div className="flex items-center gap-3 text-sm">
-              <Coffee className="h-5 w-5 text-muted-foreground" />
+            <div className="flex items-center gap-2 sm:gap-3 text-sm">
+              <Coffee className="h-5 w-5 shrink-0 text-muted-foreground" />
               <span>Roasted to order</span>
             </div>
-            <div className="flex items-center gap-3 text-sm">
-              <Shield className="h-5 w-5 text-muted-foreground" />
+            <div className="flex items-center gap-2 sm:gap-3 text-sm">
+              <Shield className="h-5 w-5 shrink-0 text-muted-foreground" />
               <span>Quality guaranteed</span>
             </div>
           </div>
@@ -307,14 +307,14 @@ export function ProductPageClient({ params }: ProductPageClientProps) {
       </div>
 
       {/* Product Details Tabs */}
-      <div className="mt-16">
+      <div className="mt-12 sm:mt-16">
         <Tabs defaultValue="description">
-          <TabsList className="w-full justify-start">
-            <TabsTrigger value="description">Description</TabsTrigger>
-            <TabsTrigger value="reviews">
+          <TabsList className="w-full justify-start overflow-x-auto">
+            <TabsTrigger value="description" className="text-xs sm:text-sm">Description</TabsTrigger>
+            <TabsTrigger value="reviews" className="text-xs sm:text-sm">
               Reviews ({product.reviewCount})
             </TabsTrigger>
-            <TabsTrigger value="brewing">Brewing Guide</TabsTrigger>
+            <TabsTrigger value="brewing" className="text-xs sm:text-sm whitespace-nowrap">Brewing Guide</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="mt-6">

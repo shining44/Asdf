@@ -86,7 +86,7 @@ export default function HomePage() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-secondary-foreground/60">
+            <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-secondary-foreground/60">
               <div className="flex items-center gap-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
@@ -146,19 +146,19 @@ export default function HomePage() {
             Everything you need for the perfect cup
           </p>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {categoryCards.map((category) => (
             <Link key={category.title} href={category.href}>
-              <Card className={`group h-48 overflow-hidden transition-all hover:shadow-lg ${category.bgClass}`}>
-                <CardContent className="flex h-full items-center justify-between p-6">
-                  <div>
-                    <h3 className="text-xl font-bold">{category.title}</h3>
-                    <p className="mt-1 text-muted-foreground">{category.description}</p>
-                    <Button variant="link" className="mt-4 p-0">
+              <Card className={`group h-40 sm:h-48 overflow-hidden transition-all hover:shadow-lg ${category.bgClass}`}>
+                <CardContent className="flex h-full items-center justify-between p-4 sm:p-6">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold">{category.title}</h3>
+                    <p className="mt-1 text-sm sm:text-base text-muted-foreground">{category.description}</p>
+                    <Button variant="link" className="mt-2 sm:mt-4 p-0 text-sm sm:text-base">
                       Shop now <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
-                  <div className="text-7xl transition-transform group-hover:scale-110">
+                  <div className="text-5xl sm:text-7xl transition-transform group-hover:scale-110 shrink-0 ml-2">
                     {category.image}
                   </div>
                 </CardContent>
