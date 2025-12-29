@@ -2,10 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
+  distDir: "docs",
   images: {
     unoptimized: true,
   },
-  // Disable trailing slash to match default GitHub Pages behavior
+  // Enable trailing slash for GitHub Pages compatibility
   trailingSlash: true,
 };
 

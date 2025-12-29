@@ -14,16 +14,10 @@ const footerLinks = {
   company: [
     { name: "Our Story", href: "/about" },
     { name: "Café Locations", href: "/cafes" },
-    { name: "Wholesale", href: "/wholesale" },
-    { name: "Press", href: "/press" },
-    { name: "Careers", href: "/careers" },
   ],
   support: [
-    { name: "Contact Us", href: "/contact" },
-    { name: "FAQs", href: "/faq" },
-    { name: "Shipping & Returns", href: "/shipping" },
-    { name: "Track Order", href: "/track" },
-    { name: "Brewing Guides", href: "/guides" },
+    { name: "Shop", href: "/shop" },
+    { name: "Subscriptions", href: "/subscriptions" },
   ],
 }
 
@@ -168,14 +162,14 @@ export function Footer() {
             © {new Date().getFullYear()} Tomoca Coffee. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-secondary-foreground/60">
-            <Link href="/privacy" className="hover:text-secondary-foreground">
-              Privacy Policy
+            <Link href="/about" className="hover:text-secondary-foreground">
+              About Us
             </Link>
-            <Link href="/terms" className="hover:text-secondary-foreground">
-              Terms of Service
+            <Link href="/shop" className="hover:text-secondary-foreground">
+              Shop
             </Link>
-            <Link href="/cookies" className="hover:text-secondary-foreground">
-              Cookie Policy
+            <Link href="/cafes" className="hover:text-secondary-foreground">
+              Locations
             </Link>
           </div>
         </div>
