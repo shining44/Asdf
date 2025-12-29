@@ -59,7 +59,7 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
-        <div className="absolute inset-0 bg-[url('/images/coffee-pattern.png')] opacity-5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
         <div className="container relative py-20 md:py-32">
           <div className="mx-auto max-w-3xl text-center">
             <Badge className="mb-4 bg-primary/20 text-primary hover:bg-primary/30">
