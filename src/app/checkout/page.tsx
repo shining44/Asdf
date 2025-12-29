@@ -1,15 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
-import { ArrowLeft, Lock, CreditCard, Truck, Check, ChevronRight } from "lucide-react"
+import { Lock, CreditCard, Truck, Check, ChevronRight, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Badge } from "@/components/ui/badge"
 import { useCart } from "@/lib/cart-context"
 
 export default function CheckoutPage() {
@@ -19,6 +19,16 @@ export default function CheckoutPage() {
 
   const shippingCost = subtotal >= 50 ? 0 : shippingMethod === "express" ? 12.99 : 5.99
   const finalTotal = total + shippingCost
+
+  const estimatedDeliveryDate = useMemo(() => {
+    const deliveryDate = new Date()
+    deliveryDate.setDate(deliveryDate.getDate() + 5)
+    return deliveryDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    })
+  }, [])
 
   if (items.length === 0 && step !== "confirmation") {
     return (
@@ -62,11 +72,7 @@ export default function CheckoutPage() {
                 <div>
                   <p className="font-medium">Estimated Delivery</p>
                   <p className="text-muted-foreground">
-                    {new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
-                      weekday: "long",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    {estimatedDeliveryDate}
                   </p>
                 </div>
               </div>

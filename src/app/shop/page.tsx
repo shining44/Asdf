@@ -36,6 +36,69 @@ const sortOptions = [
   { id: "rating", name: "Highest Rated" },
 ]
 
+interface FilterContentProps {
+  category: string
+  setCategory: (category: string) => void
+  roastLevel: string
+  setRoastLevel: (roastLevel: string) => void
+  activeFiltersCount: number
+  clearFilters: () => void
+}
+
+function FilterContent({
+  category,
+  setCategory,
+  roastLevel,
+  setRoastLevel,
+  activeFiltersCount,
+  clearFilters,
+}: FilterContentProps) {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="font-semibold mb-3">Category</h3>
+        <RadioGroup value={category} onValueChange={setCategory}>
+          {categories.map((cat) => (
+            <div key={cat.id} className="flex items-center space-x-2">
+              <RadioGroupItem value={cat.id} id={`category-${cat.id}`} />
+              <Label htmlFor={`category-${cat.id}`} className="cursor-pointer">
+                {cat.name}
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
+      </div>
+
+      <Separator />
+
+      {(category === "all" || category === "coffee") && (
+        <>
+          <div>
+            <h3 className="font-semibold mb-3">Roast Level</h3>
+            <RadioGroup value={roastLevel} onValueChange={setRoastLevel}>
+              {roastLevels.map((level) => (
+                <div key={level.id} className="flex items-center space-x-2">
+                  <RadioGroupItem value={level.id} id={`roast-${level.id}`} />
+                  <Label htmlFor={`roast-${level.id}`} className="cursor-pointer">
+                    {level.name}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+          <Separator />
+        </>
+      )}
+
+      {activeFiltersCount > 0 && (
+        <Button variant="outline" onClick={clearFilters} className="w-full">
+          Clear All Filters
+        </Button>
+      )}
+    </div>
+  )
+}
+
 function ShopContent() {
   const searchParams = useSearchParams()
   const initialCategory = searchParams.get("category") || "all"
@@ -48,19 +111,16 @@ function ShopContent() {
   const filteredProducts = useMemo(() => {
     let filtered = [...products]
 
-    // Filter by category
     if (category !== "all") {
       filtered = filtered.filter((p) => p.category === category)
     }
 
-    // Filter by roast level (only for coffee)
     if (roastLevel !== "all") {
       filtered = filtered.filter(
         (p) => p.category !== "coffee" || p.roastLevel === roastLevel
       )
     }
 
-    // Sort
     switch (sortBy) {
       case "newest":
         filtered = filtered.filter((p) => p.isNew).concat(filtered.filter((p) => !p.isNew))
@@ -93,57 +153,17 @@ function ShopContent() {
     setSortBy("featured")
   }
 
-  const FilterContent = () => (
-    <div className="space-y-6">
-      {/* Category Filter */}
-      <div>
-        <h3 className="font-semibold mb-3">Category</h3>
-        <RadioGroup value={category} onValueChange={setCategory}>
-          {categories.map((cat) => (
-            <div key={cat.id} className="flex items-center space-x-2">
-              <RadioGroupItem value={cat.id} id={`category-${cat.id}`} />
-              <Label htmlFor={`category-${cat.id}`} className="cursor-pointer">
-                {cat.name}
-              </Label>
-            </div>
-          ))}
-        </RadioGroup>
-      </div>
-
-      <Separator />
-
-      {/* Roast Level Filter (only show for coffee) */}
-      {(category === "all" || category === "coffee") && (
-        <>
-          <div>
-            <h3 className="font-semibold mb-3">Roast Level</h3>
-            <RadioGroup value={roastLevel} onValueChange={setRoastLevel}>
-              {roastLevels.map((level) => (
-                <div key={level.id} className="flex items-center space-x-2">
-                  <RadioGroupItem value={level.id} id={`roast-${level.id}`} />
-                  <Label htmlFor={`roast-${level.id}`} className="cursor-pointer">
-                    {level.name}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
-          <Separator />
-        </>
-      )}
-
-      {/* Clear Filters */}
-      {activeFiltersCount > 0 && (
-        <Button variant="outline" onClick={clearFilters} className="w-full">
-          Clear All Filters
-        </Button>
-      )}
-    </div>
-  )
+  const filterProps = {
+    category,
+    setCategory,
+    roastLevel,
+    setRoastLevel,
+    activeFiltersCount,
+    clearFilters,
+  }
 
   return (
     <div className="flex gap-8">
-      {/* Desktop Sidebar Filters */}
       <aside className="hidden w-64 shrink-0 lg:block">
         <div className="sticky top-32">
           <div className="flex items-center justify-between mb-4">
@@ -157,18 +177,15 @@ function ShopContent() {
           </div>
           <Card>
             <CardContent className="p-4">
-              <FilterContent />
+              <FilterContent {...filterProps} />
             </CardContent>
           </Card>
         </div>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1">
-        {/* Toolbar */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            {/* Mobile Filter Button */}
             <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" className="lg:hidden">
@@ -186,7 +203,7 @@ function ShopContent() {
                   <SheetTitle>Filters</SheetTitle>
                 </SheetHeader>
                 <div className="mt-6">
-                  <FilterContent />
+                  <FilterContent {...filterProps} />
                 </div>
               </SheetContent>
             </Sheet>
@@ -196,7 +213,6 @@ function ShopContent() {
             </p>
           </div>
 
-          {/* Sort Dropdown */}
           <div className="flex items-center gap-2">
             <Label htmlFor="sort" className="text-sm whitespace-nowrap">
               Sort by:
@@ -216,7 +232,6 @@ function ShopContent() {
           </div>
         </div>
 
-        {/* Active Filters */}
         {activeFiltersCount > 0 && (
           <div className="mb-6 flex flex-wrap items-center gap-2">
             <span className="text-sm text-muted-foreground">Active filters:</span>
@@ -248,7 +263,6 @@ function ShopContent() {
           </div>
         )}
 
-        {/* Product Grid */}
         {filteredProducts.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {filteredProducts.map((product) => (
@@ -292,7 +306,6 @@ function ShopLoading() {
 export default function ShopPage() {
   return (
     <div className="container py-8 md:py-12">
-      {/* Page Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold md:text-4xl">Shop</h1>
         <p className="mt-2 text-muted-foreground">
