@@ -192,11 +192,12 @@ export default function SubscriptionsPage() {
                 ))}
               </RadioGroup>
             </CardContent>
-            <CardFooter className="flex justify-between">
+            <CardFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-between">
               <Button
                 variant="outline"
                 onClick={handleBack}
                 disabled={currentStep === 0}
+                className="w-full sm:w-auto"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back
@@ -204,6 +205,7 @@ export default function SubscriptionsPage() {
               <Button
                 onClick={handleNext}
                 disabled={!answers[currentQuestion.id]}
+                className="w-full sm:w-auto"
               >
                 {currentStep === quizQuestions.length - 1 ? "Get Recommendation" : "Next"}
                 <ArrowRight className="ml-2 h-4 w-4" />

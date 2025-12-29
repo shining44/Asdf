@@ -116,7 +116,7 @@ export default function CheckoutPage() {
               return (
                 <div key={s} className="flex items-center">
                   <div
-                    className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
+                    className={`flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full text-xs sm:text-sm font-medium ${
                       isActive
                         ? "bg-primary text-primary-foreground"
                         : isPast
@@ -124,17 +124,17 @@ export default function CheckoutPage() {
                         : "bg-muted text-muted-foreground"
                     }`}
                   >
-                    {isPast ? <Check className="h-4 w-4" /> : i + 1}
+                    {isPast ? <Check className="h-3 w-3 sm:h-4 sm:w-4" /> : i + 1}
                   </div>
                   <span
-                    className={`ml-2 hidden sm:block ${
+                    className={`ml-1.5 sm:ml-2 text-xs sm:text-sm hidden xs:block ${
                       isActive ? "font-medium" : "text-muted-foreground"
                     }`}
                   >
                     {s}
                   </span>
                   {i < 2 && (
-                    <ChevronRight className="mx-4 h-4 w-4 text-muted-foreground" />
+                    <ChevronRight className="mx-2 sm:mx-4 h-4 w-4 text-muted-foreground" />
                   )}
                 </div>
               )
