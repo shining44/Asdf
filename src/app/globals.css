@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* Tomoca Coffee Brand Theme */
+:root {
+  /* Brand Colors */
+  --background: 45 33% 97%; /* Warm cream #FAF7F2 */
+  --foreground: 20 45% 8%; /* Deep espresso #1A0F0A */
+
+  /* Card & Popup backgrounds */
+  --card: 40 30% 98%;
+  --card-foreground: 20 45% 8%;
+  --popover: 40 30% 98%;
+  --popover-foreground: 20 45% 8%;
+
+  /* Primary: Ethiopian Gold/Amber */
+  --primary: 43 73% 47%; /* #C9A227 */
+  --primary-foreground: 45 33% 97%;
+
+  /* Secondary: Rich Espresso Brown */
+  --secondary: 24 47% 16%; /* #3C2415 */
+  --secondary-foreground: 45 33% 97%;
+
+  /* Muted tones */
+  --muted: 40 20% 92%;
+  --muted-foreground: 20 25% 35%;
+
+  /* Accent */
+  --accent: 24 47% 16%;
+  --accent-foreground: 45 33% 97%;
+
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Border & Input */
+  --border: 30 20% 85%;
+  --input: 30 20% 85%;
+  --ring: 43 73% 47%;
+
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* Chart colors */
+  --chart-1: 43 73% 47%;
+  --chart-2: 24 47% 16%;
+  --chart-3: 30 30% 50%;
+  --chart-4: 45 33% 70%;
+  --chart-5: 20 45% 25%;
+}
+
+/* Dark mode - rich coffee tones */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 20 30% 6%;
+    --foreground: 40 25% 92%;
+
+    --card: 20 25% 10%;
+    --card-foreground: 40 25% 92%;
+    --popover: 20 25% 10%;
+    --popover-foreground: 40 25% 92%;
+
+    --primary: 43 73% 52%;
+    --primary-foreground: 20 30% 6%;
+
+    --secondary: 40 25% 20%;
+    --secondary-foreground: 40 25% 92%;
+
+    --muted: 20 20% 18%;
+    --muted-foreground: 40 20% 65%;
+
+    --accent: 43 50% 30%;
+    --accent-foreground: 40 25% 92%;
+
+    --border: 20 20% 20%;
+    --input: 20 20% 20%;
+    --ring: 43 73% 52%;
+  }
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Base styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Custom scrollbar for coffee aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Selection styling */
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
+}
